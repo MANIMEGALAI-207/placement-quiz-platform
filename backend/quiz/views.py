@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.db.models import Count, Q
+from django.db.models import Max
 
 from .models import Test, Question, Result, ResultAnswer, Topic
 from .serializers import (
@@ -139,3 +140,33 @@ class WeakTopicsView(APIView):
 
         weak_topics.sort(key=lambda x: x['accuracy'])
         return Response(weak_topics)
+
+class LeaderboardView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Top 10 users by their best score percentage
+        results = Result.objects.select_related('user', 'test').all()
+        
+        user_best = {}
+        for r in results:
+            percentage = round((r.score / r.total) * 100, 2) if r.total else 0
+            key = r.user.id
+            if key not in user_best or percentage > user_best[key]['percentage']:
+                user_best[key] = {
+                    'user_id': r.user.id,
+                    'username': r.user.username,
+                    'test_title': r.test.title,
+                    'score': r.score,
+                    'total': r.total,
+                    'percentage': percentage,
+                    'taken_at': r.taken_at
+                }
+        
+        leaderboard = sorted(user_best.values(), key=lambda x: x['percentage'], reverse=True)[:10]
+        
+        # Add rank
+        for i, entry in enumerate(leaderboard, 1):
+            entry['rank'] = i
+        
+        return Response(leaderboard)

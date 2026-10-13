@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     TestListView, TestDetailView, SubmitTestView,
-    ResultListView, ResultDetailView, WeakTopicsView
+    ResultListView, ResultDetailView, WeakTopicsView,
+    LeaderboardView,
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path('results/', ResultListView.as_view(), name='result-list'),
     path('results/<int:result_id>/', ResultDetailView.as_view(), name='result-detail'),
     path('weak-topics/', WeakTopicsView.as_view(), name='weak-topics'),
+    path('leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
 ]

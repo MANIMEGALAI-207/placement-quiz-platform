@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard';
 import Quiz from './pages/Quiz';
 import Result from './pages/Result';
 import WeakTopics from './pages/WeakTopics';
+import Leaderboard from './pages/Leaderboard';
+import History from './pages/History';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -24,6 +26,8 @@ function App() {
           <Route path="/quiz/:id" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
           <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
           <Route path="/weak-topics" element={<ProtectedRoute><WeakTopics /></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
+          <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
           <Route path="/" element={<Navigate to="/dashboard" />} />
         </Routes>
       </BrowserRouter>

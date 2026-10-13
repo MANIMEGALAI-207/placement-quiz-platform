@@ -49,7 +49,25 @@ export default function Dashboard() {
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-600">Placement Quiz</h1>
           <div className="flex items-center gap-4">
-            <span className="text-gray-700">
+            <Link
+              to="/dashboard"
+              className="text-gray-700 hover:text-blue-600 font-medium"
+            >
+              Dashboard
+            </Link>
+            <Link
+              to="/leaderboard"
+              className="text-gray-700 hover:text-blue-600 font-medium"
+            >
+              🏆 Leaderboard
+            </Link>
+            <Link
+              to="/history"
+              className="text-gray-700 hover:text-blue-600 font-medium"
+            >
+              📜 History
+            </Link>
+            <span className="text-gray-700 hidden md:inline">
               Hi, <strong>{user?.username}</strong> ({user?.role})
             </span>
             <button
