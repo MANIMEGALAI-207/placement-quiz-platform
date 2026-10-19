@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-)g13n@j10otyd%&h=m4t)^nyrsyg4-g)56h_k3e6%!8&y+0a(1'
 
-DEBUG = True   # Deploy panna munnadi False-ah maathuvom (ippo local-la test panna True)
+DEBUG = False  # Deploy panna munnadi False-ah maathuvom (ippo local-la test panna True)
 
 ALLOWED_HOSTS = ['*'] # Production ku allow pannom
 
